@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Expenses.css";
-import ExpenseItems from "./ExpenseItems";
+import ExpensesList from "./ExpensesList";
 import Card from "../UI/Card";
 import ExpenseFilter from "./ExpenseFilter";
+import ExpensesChart from "./ExpensesChart";
 
 const Expenses = (props) => {
   const [filteredYear, setFilteredYear] = useState("");
@@ -14,12 +15,36 @@ const Expenses = (props) => {
   const filteredExpense = props.item.filter((expense) => {
     return expense.date.getFullYear().toString() === filteredYear;
   });
-  // console.log(filteredExpense);
+ 
 
   return (
+    <li>
     <Card className="expenses">
       <ExpenseFilter onChangeFilter={filterChangeHandler} />
+
+      <ExpensesChart expenses={filteredExpense} />
+
+      <ExpensesList items={filteredExpense} />
+
       
+      
+{/*       
+      code for conditional outputting content */}
+
+      {/* {filteredExpense.length === 0? (<p>No data found for this year.</p>) : (filteredExpense.map((expense) => (
+        <ExpenseItems
+          key={expense.id}
+          title={expense.title}
+          amount={expense.amount}
+          date={expense.date}
+        />
+      ))) } */}
+
+
+
+      
+      {/* this piece of code use to display date which is present in array.
+      there is no condition if data is not available then what happened
       {filteredExpense.map((expense) => (
         <ExpenseItems
           key={expense.id}
@@ -27,7 +52,7 @@ const Expenses = (props) => {
           amount={expense.amount}
           date={expense.date}
         />
-      ))} 
+      ))}  */}
     
     
     
@@ -45,7 +70,7 @@ const Expenses = (props) => {
 {/* <-------------------------------------> */}
 
 
-      ;{/* this method is use for static array value. */}
+      {/* this method is use for static array value. */}
       {/* <ExpenseItems
         title={props.item[0].title}
         amount={props.item[0].amount}
@@ -67,6 +92,7 @@ const Expenses = (props) => {
         date={props.item[3].date}
       /> */}
     </Card>
+    </li>
   );
 };
 
